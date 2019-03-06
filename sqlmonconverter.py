@@ -1,3 +1,8 @@
+"""
+https://thispointer.com/python-how-to-remove-characters-from-a-string-by-index/
+https://thispointer.com/python-how-to-remove-multiple-elements-from-list/
+"""
+
 f = open('C:\\Users\\guilherme.maas\\Documents\\dev\\sqlmon-converter\\sqlmonexemplo.txt', 'r')
 
 dict = {}
@@ -40,6 +45,32 @@ with open('C:\\Users\\guilherme.maas\\Documents\\dev\\sqlmon-converter\\sqlmonex
         else:
             pass
 
+update_list = []
+update_list2 = []
+
+with open('C:\\Users\\guilherme.maas\\Documents\\dev\\sqlmon-converter\\sqlmonexemplo.txt', 'r') as f:
+    for line in f:
+        if 'UPDATE' in line:
+            split_line = line.split()
+            update_list.append(split_line)
+            update_list2.append(line)
+        else:
+            pass
+
+for line in update_list:
+    print(f'{line}\n')
+
+print('=' * 50)
+
+for line in update_list2:
+    print(f'{line}\n')
+
+for line in update_list2:
+    for char in line[0:28]:
+
+
+
 print(update_dict)
+print(update_dict['14'])
 #print(f.read())
 print(type(f))
