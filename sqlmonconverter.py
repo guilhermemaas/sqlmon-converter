@@ -65,10 +65,19 @@ print('=' * 50)
 for line in update_list2:
     print(f'{line}\n')
 
+print('*' * 50)
+
+print('Removendo...')
+
+print('*' * 50)
+
+print('Print, alterado.')
 for line in update_list2:
-    for char in line[0:28]:
+    line = line [28:]
+    print(line)
+    print(type(line))
 
-
+print('*' * 50)
 
 print(update_dict)
 print(update_dict['14'])
