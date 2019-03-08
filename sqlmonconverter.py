@@ -48,14 +48,46 @@ with open('C:\\Users\\guilherme.maas\\Documents\\dev\\sqlmon-converter\\sqlmonex
 update_list = []
 update_list2 = []
 
-with open('C:\\Users\\guilherme.maas\\Documents\\dev\\sqlmon-converter\\sqlmonexemplo.txt', 'r') as f:
-    for line in f:
+file_path = 'C:\\Users\\guilherme.maas\\Documents\\dev\\sqlmon-converter\\sqlmonexemplo.txt'
+
+def open_file(file_text):
+    file_text = file_text
+    f = open(file_text, 'r')
+
+    return f
+
+
+def split_lines(text_file):
+    text_file = text_file
+    update_list = []
+    delete_list = []
+    insert_list = []
+    select_list = []
+    datain_list = []
+    dataout_list = []
+    etc_list = []
+    for line in text_file:
         if 'UPDATE' in line:
             split_line = line.split()
             update_list.append(split_line)
-            update_list2.append(line)
+        elif 'DELETE' in line:
+            split_line = line.split()
+            delete_list.append(split_line)
+        elif 'INSERT' in line:
+            split_line = line.split()
+            insert_list.append(split_line)
+        elif 'SELECT' in line:
+            split_line = line.split()
+            select_list.append(split_line)
+        elif 'DATA IN' in line:
+            split_line = line.split()
+            datain_list.append(split_line)
+        elif 'DATA OUT' in line:
+            split_line = line.split()
+            dataout_list.append(split_line)
         else:
-            pass
+            split_line = line.split()
+            etc_list.append(split_line)
 
 for line in update_list:
     print(f'{line}\n')
