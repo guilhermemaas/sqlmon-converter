@@ -89,6 +89,17 @@ def split_lines(text_file):
             split_line = line.split()
             etc_list.append(split_line)
 
+        text_objects = []
+        text_objects.append(update_list, select_list)
+        text_objects.append(delete_list, insert_list)
+        text_objects.append(datain_list, dataout_list, etc_list)
+
+        for object in text_objects:
+            for line in object:
+                line = line[28:]
+
+        return text_objects
+
 for line in update_list:
     print(f'{line}\n')
 
