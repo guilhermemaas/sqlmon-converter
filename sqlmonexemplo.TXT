@@ -13,7 +13,7 @@
 13      11:24:22  DATA OUT - Column = 2, Type = varString, Precision = 255, Scale = 0, Data = Vales
 14      11:24:22  PREPARE - UPDATE R975PRP SET ITEMNAM = ?, ITEMDSC = ? WHERE MODID = ? AND ITEMID = ?
 15      11:24:22  DATA IN - Param = 1, Type = varString, Precision = 0, Scale = 0, Data = NFR044VAL
-16      11:24:22  DATA IN - Param = 2, Type = varString, Precision = 0, Scale = 0, Data = Manutenção
+16      11:24:22  DATA IN - Param = 2, Type = varString, Precision = 0, Scale = 0, Data = Manutenï¿½ï¿½o
 17      11:24:22  DATA IN - Param = 3, Type = varInteger, Precision = 0, Scale = 0, Data = 1
 18      11:24:22  DATA IN - Param = 4, Type = varInteger, Precision = 0, Scale = 0, Data = -620141461
 19      11:24:22  EXECUTE - UPDATE R975PRP SET ITEMNAM = ?, ITEMDSC = ? WHERE MODID = ? AND ITEMID = ?
@@ -130,7 +130,7 @@
 130     11:24:23  DATA IN - Param = 2, Type = varInteger, Precision = 0, Scale = 0, Data = -620141461
 131     11:24:23  EXECUTE - SELECT R975PRP.ITEMNAM "ITEMNAM", R975PRP.ITEMDSC "ITEMDSC" FROM R975PRP WHERE R975PRP.MODID = ? AND R975PRP.ITEMID = ?
 132     11:24:23  DATA OUT - Column = 1, Type = varString, Precision = 255, Scale = 0, Data = NFR044VAL
-133     11:24:23  DATA OUT - Column = 2, Type = varString, Precision = 255, Scale = 0, Data = Manutenção
+133     11:24:23  DATA OUT - Column = 2, Type = varString, Precision = 255, Scale = 0, Data = Manutenï¿½ï¿½o
 134     11:24:23  PREPARE - UPDATE R975PRP SET ITEMNAM = ?, ITEMDSC = ? WHERE MODID = ? AND ITEMID = ?
 135     11:24:23  DATA IN - Param = 1, Type = varString, Precision = 0, Scale = 0, Data = NFR044VAL
 136     11:24:23  DATA IN - Param = 2, Type = varString, Precision = 0, Scale = 0, Data = Vales
