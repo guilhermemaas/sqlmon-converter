@@ -24,13 +24,14 @@ def define_type(type_line):
 
 
 block_id = 0
+
 def split_lines(block_id):
     """
     Leitura linha-a-linha.
     """
     line_dict = {}
     line_list = []
-    with open('C:\\Users\sword art\\Documents\\dev\\sqlmon-converter\\sqlmonexemplo.txt', 'r') as text_file:
+    with open('C:\\Users\\guilherme.maas\\Documents\\dev\\sqlmon-converter\\sqlmonexemplo.txt', 'r') as text_file:
         for line in text_file:
             split_line = line.split()
 
