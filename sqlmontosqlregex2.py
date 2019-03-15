@@ -28,22 +28,32 @@ def split_lines(block_id):
     line_list = []
     with open('C:\\Users\\guilherme.maas\\Documents\\dev\\sqlmon-converter\\sqlmonexemplo.txt', 'r') as text_file:
         for line in text_file:
-            if 'INSERT' in line or 'UPDATE' in line or 'SELECT' in line or 'DELETE' in line:
-                regex_exec = re.search(r'(.*)\s{2}(\d{2}\:\d{2}\:\d{2})\s{2}(.*)\s{1}\-{1}\s{1}(.*)', line)
-                line_dict['line']= regex_exec.group(1)
-                line_dict['hour'] = regex_exec.group(2)
+            regex_exec = re.search(r'(.*)\s{2}(\d{2}\:\d{2}\:\d{2})\s{2}(.*)\s{1}\-{1}\s{1}(.*)', line)
+            if 'INSERT' in line or 'UPDATE' in line or 'SELECT' in line \
+                or 'DELETE' in line or 'DATA IN' in line or 'DATA OUT' in line or \
+                    'PREPARE' in line or 'EXECUTE' in line:
                 line_dict['type'] = regex_exec.group(3)
-                line_dict['command'] = regex_exec.group(4)
-                line_dict['block'] = block_id
-                block_id += 1
-                line_list.append(line_dict.copy())
-                line_dict.clear()
             else:
-                print('ETC')
+                line_dict['type'] = 'ETC'
+            line_dict['line']= regex_exec.group(1)
+            line_dict['hour'] = regex_exec.group(2)
+            line_dict['command'] = regex_exec.group(4)
+            if '?' in line_dict['command']:
+                for letter in line_dict['command']:
+                    if letter == '?':
+                        count_letter += 1
+                line_dict['count_param'] = count_letter
+            else:
+                line_dict['count_param'] = 'NULL'
+            if line_dict['type'] == 'PREPARE':
+                block_id += 1
+            line_dict['block'] = block_id
+            line_list.append(line_dict.copy())
+            line_dict.clear()
     return line_list
 
-block_id = 0
+block_id = 1
 file_readed = split_lines(block_id)
 
 for linha in file_readed:
-    print(linha['block'], linha['line'], linha['hour'], linha['type'], linha['command'])
+    print(linha['block'], linha['line'], linha['hour'], linha['type'], linha['command'], linha['count_param'])

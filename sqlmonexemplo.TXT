@@ -418,3 +418,4 @@
 418     11:24:48  PREPARE - UPDATE R911SRV SET NUMSEC = 0 WHERE NUMSRV = ?
 419     11:24:48  DATA IN - Param = 1, Type = varInteger, Precision = 0, Scale = 0, Data = 1000
 420     11:24:48  EXECUTE - UPDATE R911SRV SET NUMSEC = 0 WHERE NUMSRV = ?
+421     11:24:49  ERRO - EXECUTAR >>> Comando!
