@@ -38,7 +38,7 @@ def split_lines(block_id):
             line_dict['line']= regex_exec.group(1)
             line_dict['hour'] = regex_exec.group(2)
             line_dict['command'] = regex_exec.group(4)
-            if '?' in line_dict['command'] and line_dict['type'] in ('INSERT' or 'UPDATE' or 'DELETE'):
+            if '?' in line_dict['command'] and line_dict['type'] in ('INSERT' or 'UPDATE' or 'DELETE' or 'SELECT'):
                 count_letter = 0
                 for letter in line_dict['command']:
                     if letter == '?':
