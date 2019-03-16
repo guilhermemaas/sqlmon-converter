@@ -26,7 +26,7 @@ def define_type(type_line):
 def split_lines(block_id):
     line_dict = {}
     line_list = []
-    with open('C:\\Users\\guilherme.maas\\Documents\\dev\\sqlmon-converter\\sqlmonexemplo.txt', 'r') as text_file:
+    with open('C:\\Users\\sword art\\Documents\\dev\\sqlmon-converter\\sqlmonexemplo.txt', 'r') as text_file:
         for line in text_file:
             regex_exec = re.search(r'(.*)\s{2}(\d{2}\:\d{2}\:\d{2})\s{2}(.*)\s{1}\-{1}\s{1}(.*)', line)
             if 'INSERT' in line or 'UPDATE' in line or 'SELECT' in line \
@@ -38,13 +38,19 @@ def split_lines(block_id):
             line_dict['line']= regex_exec.group(1)
             line_dict['hour'] = regex_exec.group(2)
             line_dict['command'] = regex_exec.group(4)
-            if '?' in line_dict['command']:
+            if '?' in line_dict['command'] and line_dict['type'] in ('INSERT' or 'UPDATE' or 'DELETE'):
+                count_letter = 0
                 for letter in line_dict['command']:
                     if letter == '?':
                         count_letter += 1
                 line_dict['count_param'] = count_letter
             else:
                 line_dict['count_param'] = 'NULL'
+            if line_dict['type'] == 'DATA IN':
+                regex_param = re.search(r'\s\Data\s\=\s(.*)', line_dict['command'])
+                line_dict['datain'] = regex_param.group(1)
+            else:
+                line_dict['datain'] = 'NULL'
             if line_dict['type'] == 'PREPARE':
                 block_id += 1
             line_dict['block'] = block_id
@@ -56,4 +62,4 @@ block_id = 1
 file_readed = split_lines(block_id)
 
 for linha in file_readed:
-    print(linha['block'], linha['line'], linha['hour'], linha['type'], linha['command'], linha['count_param'])
+    print(linha['block'], linha['line'], linha['hour'], linha['type'], linha['command'], linha['count_param'], linha['datain'])
