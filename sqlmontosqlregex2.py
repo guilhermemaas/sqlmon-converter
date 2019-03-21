@@ -22,23 +22,22 @@ def define_type(type_line):
         vline_type = 'ETC'
     return vline_type
 
-
-def split_lines(block_id):
+def split_lines(block_id, dir):
     line_dict = {}
     line_list = []
-    with open('C:\\Users\\sword art\\Documents\\dev\\sqlmon-converter\\sqlmonexemplo.txt', 'r') as text_file:
+    with open(dir, 'r') as text_file:
         for line in text_file:
             regex_exec = re.search(r'(.*)\s{2}(\d{2}\:\d{2}\:\d{2})\s{2}(.*)\s{1}\-{1}\s{1}(.*)', line)
             if 'INSERT' in line or 'UPDATE' in line or 'SELECT' in line \
                 or 'DELETE' in line or 'DATA IN' in line or 'DATA OUT' in line or \
-                    'PREPARE' in line or 'EXECUTE' in line:
+                    'PREPARE' in line or 'EXECUTE' in line or 'Error' in line:
                 line_dict['type'] = regex_exec.group(3)
             else:
                 line_dict['type'] = 'ETC'
             line_dict['line']= regex_exec.group(1)
             line_dict['hour'] = regex_exec.group(2)
             line_dict['command'] = regex_exec.group(4)
-            if '?' in line_dict['command'] and line_dict['type'] in ('INSERT' or 'UPDATE' or 'DELETE' or 'SELECT'):
+            if '?' in line_dict['command']:
                 count_letter = 0
                 for letter in line_dict['command']:
                     if letter == '?':
@@ -58,8 +57,24 @@ def split_lines(block_id):
             line_dict.clear()
     return line_list
 
+def block_params(line_list):
+    list_param = []
+    param_detail = {}
+    num_param = 0
+    for line in line_list:
+        if line_list['type'] == 'DATA IN':
+            regex_exec = re.search(r'\Type\s\=\s(.*)\,\s\Precision', line)
+            num_param += 1
+            param_detail['param_num'] = num_param
+            param_detail['param_type'] = regex_exec.group(1)
+            list_param.append(param_detail.copy())
+        param_detail.clear() 
+    return(list_param)
+            
+
 block_id = 1
-file_readed = split_lines(block_id)
+dir = 'C:\\Users\\guilherme.maas\\Documents\\dev\\sqlmon-converter\\sqlmonexemplo.txt'
+file_readed = split_lines(block_id, dir)
 
 for linha in file_readed:
     print(linha['block'], linha['line'], linha['hour'], linha['type'], linha['command'], linha['count_param'], linha['datain'])
