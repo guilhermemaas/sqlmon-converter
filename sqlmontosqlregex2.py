@@ -62,11 +62,14 @@ def block_params(line_list):
     param_detail = {}
     num_param = 0
     for line in line_list:
-        if line_list['type'] == 'DATA IN':
-            regex_exec = re.search(r'\Type\s\=\s(.*)\,\s\Precision', line)
+        if line['type'] == 'DATA IN':
+            regex_type = re.search(r'(Type)\s\=\s(.*)\,\s(Precision)', line['command'])
             num_param += 1
             param_detail['param_num'] = num_param
-            param_detail['param_type'] = regex_exec.group(1)
+            param_detail['param_type'] = regex_type.group(2)
+            regex_param = re.search(r'\Data\s\=\s(.*)', line['command'])
+            param_detail['param_param'] = regex_param.group(1)
+            param_detail['param_block'] = line['block']
             list_param.append(param_detail.copy())
         param_detail.clear() 
     return(list_param)
@@ -74,7 +77,20 @@ def block_params(line_list):
 
 block_id = 1
 dir = 'C:\\Users\\guilherme.maas\\Documents\\dev\\sqlmon-converter\\sqlmonexemplo.txt'
-file_readed = split_lines(block_id, dir)
-
-for linha in file_readed:
+file_read = split_lines(block_id, dir)
+param_list = block_params(file_read)
+for linha in file_read:
     print(linha['block'], linha['line'], linha['hour'], linha['type'], linha['command'], linha['count_param'], linha['datain'])
+
+print('=' * 50)
+print(param_list)
+print(type(param_list))
+print('=' * 50)
+
+for param in param_list:
+    print(param)
+    print('\n')
+
+file = open('filetest.txt', 'w')
+for line in file_read:
+    file.write(str(line['block']) + '|' + str(line['line']) + '|' + str(line['hour']) + '|' + str(line['command']) + '\n')
