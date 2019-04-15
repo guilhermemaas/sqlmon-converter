@@ -1,27 +1,6 @@
 import re
 
 
-def define_type(type_line):
-    if type_line == 'PREPARE':
-        vline_type = 'PREPARE'
-    elif type_line == 'UPDATE':
-        vline_type = 'UPDATE'
-    elif type_line == 'INSERT':
-        vline_type = 'INSERT'
-    elif type_line == 'DELETE':
-        vline_type = 'DELETE'
-    elif type_line == 'SELECT':
-        vline_type = 'SELECT'
-    elif type_line == 'DATA IN':
-        vline_type = 'DATA IN'
-    elif type_line == 'DATA OUT':
-        vline_type = 'DATA OUT'
-    elif type_line == 'EXECUTE':
-        vline_type = 'EXECUTE'
-    else:
-        vline_type = 'ETC'
-    return vline_type
-
 def split_lines(block_id, dir):
     line_dict = {}
     line_list = []
@@ -82,15 +61,6 @@ param_list = block_params(file_read)
 for linha in file_read:
     print(linha['block'], linha['line'], linha['hour'], linha['type'], linha['command'], linha['count_param'], linha['datain'])
 
-print('=' * 50)
-print(param_list)
-print(type(param_list))
-print('=' * 50)
-
-for param in param_list:
-    print(param)
-    print('\n')
-
-file = open('filetest.txt', 'w')
+file_out = open('filetest.txt', 'w')
 for line in file_read:
-    file.write(str(line['block']) + '|' + str(line['line']) + '|' + str(line['hour']) + '|' + str(line['command']) + '\n')
+    file_out.write(str(line['type']) + '|' + str(line['block']) + '|' + str(line['line']) + '|' + str(line['hour']) + '|' + str(line['command']) + '\n')
